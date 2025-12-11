@@ -1,7 +1,7 @@
 "use client";
 
 import { useWorkoutStore } from "@/store/workoutStore";
-import { getAllExercises } from "@/lib/muscleMapping";
+import { getAllExercises, EXERCISE_DATABASE } from "@/lib/muscleMapping";
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "./ui/components";
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
@@ -46,14 +46,14 @@ export function AddExerciseForm() {
                             >
                                 {options.map(opt => (
                                     <option key={opt} value={opt}>
-                                        {/* @ts-expect-error Dynamic key generation */}
-                                        {t(`exercise_${opt}`)}
+                                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                        {t(`exercise_${opt}` as any)}
                                     </option>
                                 ))}
                             </select>
                             <p className="text-xs text-muted-foreground mt-1 px-1 italic">
-                                {/* @ts-expect-error Dynamic key generation */}
-                                {t(`instruction_${selectedExercise}`)}
+                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                {t(`instruction_${selectedExercise}` as any)}
                             </p>
                         </div>
 
@@ -95,10 +95,19 @@ export function AddExerciseForm() {
                         <div key={ex.id} className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card transition-colors">
                             <div>
                                 <div className="font-medium">
-                                    {/* @ts-expect-error Dynamic key generation */}
-                                    {t(`exercise_${ex.exerciseName}`)}
+                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                    {t(`exercise_${ex.exerciseName}` as any)}
                                 </div>
-                                <div className="text-xs text-muted-foreground">{ex.sets} x {ex.reps} @ {ex.weight}lbs</div>
+                                <div className="text-xs text-muted-foreground">{ex.sets} x {ex.reps} @ {
+                                    (() => {
+                                        const def = EXERCISE_DATABASE[ex.exerciseName];
+                                        if (def?.isBodyweight) {
+                                            if (ex.weight === 0) return 'Bodyweight';
+                                            return `Bodyweight + ${ex.weight}${unitSystem === 'metric' ? 'kg' : 'lbs'}`;
+                                        }
+                                        return `${ex.weight}${unitSystem === 'metric' ? 'kg' : 'lbs'}`
+                                    })()
+                                }</div>
                             </div>
                             <Button variant="ghost" size="icon" onClick={() => removeExercise(ex.id)} className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10">
                                 <Trash2 className="h-4 w-4" />

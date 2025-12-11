@@ -4,40 +4,46 @@
 
 > **Live Demo:** [Link to Demo] | **Status:** Production Ready
 
-**Smart Split** is a high-performance Progressive Web App (PWA) engineered to solve a specific problem in resistance training: quantifying systemic fatigue. Unlike generic trackers, it uses a custom **Linear Fatigue Algorithm** to visualize cumulative stress and muscle recovery in real-time.
+**Smart Split** is a high-performance Progressive Web App (PWA) engineered to quantify systemic fatigue and visualize muscle recovery in real-time. Unlike generic trackers, it combines **physiological algorithms** (Mifflin-St Jeor) with **biomechanical data** to provide personalized insights.
 
 ## 🎯 Why I Built This
-I wanted to bridge the gap between simple loggers and complex biomechanics software. The goal was to demonstrate how **modern web technologies** can deliver native-like performance and complex data visualization without sacrificing accessibility or SEO.
+To bridge the gap between simple workout loggers and complex biomechanics software. The goal was to demonstrate how **modern web technologies** can deliver native-like performance, complex data visualization, and offline capabilities without sacrificing accessibility or SEO.
 
 ## 🛠 Engineering Spotlight
 
 ### Core Architecture
-- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/) for server-side rendering and SEO optimization.
-- **State Management:** [Zustand](https://github.com/pmndrs/zustand) selected over Redux for its atomic updates and reduced boilerplate, ensuring 60fps performance during complex heatmap re-renders.
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with a mobile-first approach, implementing a custom design system without relying on heavy component libraries.
-- **Type Safety:** **Strict TypeScript** configuration to eliminate runtime errors and ensure self-documenting code.
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/) for server-side rendering and SEO optimizations.
+- **State Management:** [Zustand](https://github.com/pmndrs/zustand) with **Persistence Middleware** for an offline-first experience.
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) implementing a custom design system with Glassmorphism and hardware-accelerated animations.
+- **Type Safety:** **Strict TypeScript** configuration to eliminate runtime errors.
 
-### Key Features & Challenges Solved
-1.  **Real-Time Data Visualization**:
-    - *Challenge:* Rendering complex SVG heatmaps efficiently on mobile devices.
-    - *Solution:* Implemented a component-level hydration strategy where the SVG layers are decoupled from the main thread logic, ensuring smooth interactions even with large datasets.
+### Key Features & Technical Implementations
 
-2.  **Offline Capability (PWA)**:
-    - *Challenge:* Users need access to their logs in gyms with poor connectivity.
-    - *Solution:* Integrated a custom Service Worker Strategy that caches static assets and queues API mutations for background sync (staged).
+#### 1. Real-Time Biomechanical Heatmap
+- *Implementation:* Decoupled SVG layer rendering component that maps 24+ unique muscle groups to a 4-tier fatigue scale.
+- *Performance:* optimized for 60fps interaction on mobile devices using separate hydration layers.
+- *UX:* "Scanner" animations and dynamic contrast adjustment for Dark/Light modes.
 
-3.  **Algorithmic Complexity**:
-    - *Challenge:* Calculating "System Stress" requires aggregating multi-variable inputs (volume, intensity, muscle groups).
-    - *Solution:* Developed a pure function `calculateRecovery` engine that is fully unit-tested with **Jest** to ensure accuracy across edge cases.
+#### 2. Advanced Algorithmic Logic
+- **Calorie Burn Engine:** Implements the **Mifflin-St Jeor Equation** combined with exercise-specific **MET (Metabolic Equivalent)** values to calculate personalized energy expenditure based on user biometrics (height, weight, age, gender).
+- **Linear Fatigue Modeling:** Aggregates volume load across primary and secondary muscle movers (e.g., a Bench Press fatigues Triceps at 70% of Pecs) to predict recovery times (12h - 96h).
+
+#### 3. Global Accessibility
+- **Internationalization (i18n):** Native support for 10+ languages including RTL support for Arabic, managed via a scalable dictionary store.
+- **Data Portability:** Client-side **CSV Generation** allowing users to instantly export their raw workout data for external analysis.
+
+#### 4. System Stability
+- **Duration Estimation:** Dynamic time forecasting based on Rep/Set tempo settings.
+- **Unit Conversion:** Real-time bidirectional conversion between Imperial (lbs) and Metric (kg) systems.
 
 ## ✅ Quality Assurance
-- **Testing:** 
-  - **Unit:** 100% coverage on core logic modules (`__tests__/store.test.ts`, `recovery.test.ts`).
+- **Testing Strategy:** 
+  - **Unit:** 100% coverage on core logic modules (recovery algorithms, calorie math) using **Jest**.
   - **E2E:** Critical user flows automated with **Playwright**.
-- **CI/CD:** Automated pipelines via **GitHub Actions** run linting, type checking, and tests on every push.
-- **Code Quality:** Enforced with **Husky** (pre-commit hooks) and **Lint-staged** to prevent bad commits.
+- **CI/CD:** Automated pipelines via **GitHub Actions** run linting and type checking on every push.
+- **Code Quality:** Enforced with **Husky** (pre-commit hooks) and **Lint-staged**.
 
-## 🚀 Quick Start for Reviewers
+## 🚀 Quick Start
 
 ```bash
 # Clone the repo

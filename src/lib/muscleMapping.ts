@@ -24,6 +24,7 @@ export interface MuscleImpact {
 export interface ExerciseDef {
     impact: MuscleImpact[];
     metValue?: number; // Metabolic Equivalent of Task (approx intensity)
+    isBodyweight?: boolean;
 }
 
 export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
@@ -70,6 +71,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'RearDelts', activation: 6 },
         ],
         metValue: 6.0,
+        isBodyweight: true,
     },
     overhead_press: {
         impact: [
@@ -135,6 +137,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Abs', activation: 10 },
         ],
         metValue: 3.5,
+        isBodyweight: true,
     },
     side_plank: {
         impact: [
@@ -142,6 +145,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Abs', activation: 5 },
         ],
         metValue: 4.0,
+        isBodyweight: true,
     },
     push_up: {
         impact: [
@@ -151,6 +155,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Abs', activation: 4 },
         ],
         metValue: 5.0,
+        isBodyweight: true,
     },
     incline_bench_press: {
         impact: [
@@ -167,6 +172,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'FrontDelts', activation: 6 },
         ],
         metValue: 6.0,
+        isBodyweight: true,
     },
     lat_pulldown: {
         impact: [
@@ -193,12 +199,14 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Calves', activation: 4 },
         ],
         metValue: 7.0,
+        isBodyweight: true,
     },
     calf_raise: {
         impact: [
             { muscle: 'Calves', activation: 10 },
         ],
         metValue: 3.5,
+        isBodyweight: true,
     },
     hammer_curl: {
         impact: [
@@ -220,6 +228,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'FrontDelts', activation: 4 },
         ],
         metValue: 4.0,
+        isBodyweight: true,
     },
 };
 

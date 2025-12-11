@@ -17,7 +17,7 @@ interface BodyHeatmapProps {
 
 // Color Utility
 const getMuscleColor = (stress: number) => {
-    if (!stress || stress <= 0) return "fill-muted/20 stroke-border"; // Default: grey/transparent
+    if (!stress || stress <= 0) return "fill-muted-foreground/20 stroke-muted-foreground/30"; // Default: visible silhouette
     if (stress <= 20) return "fill-muted/40 stroke-slate-400"; // Grey (Active but low) - Distinct from empty
     if (stress <= 40) return "fill-emerald-500 stroke-emerald-600"; // Low
     if (stress <= 60) return "fill-yellow-500 stroke-yellow-600"; // Med
@@ -40,7 +40,6 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
     const userStats = useUserStore();
     const { addedExercises, durationSettings } = useWorkoutStore();
 
-    const totalSets = useMemo(() => addedExercises.reduce((acc, ex) => acc + ex.sets, 0), [addedExercises]);
     const calories = useMemo(() => calculateCalories(userStats, addedExercises), [userStats, addedExercises]);
     const duration = useMemo(() => calculateDuration(addedExercises, durationSettings.secondsPerRep, durationSettings.secondsPerSet), [addedExercises, durationSettings]);
 

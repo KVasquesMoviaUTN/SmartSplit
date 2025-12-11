@@ -52,40 +52,49 @@ const calculateStress = (exercises: WorkoutSet[]) => {
     return { heatmap: newHeatmap as Record<MuscleGroup, number>, total: totalScale };
 };
 
-export const useWorkoutStore = create<WorkoutState>((set, get) => ({
-    addedExercises: [],
-    heatmap: {} as Record<MuscleGroup, number>,
-    totalSystemStress: 0,
-    unitSystem: 'imperial',
-    durationSettings: {
-        secondsPerRep: 6,
-        secondsPerSet: 120,
-    },
+import { persist } from 'zustand/middleware';
 
-    addExercise: (exercise) => {
-        const newEx = { ...exercise, id: crypto.randomUUID() };
-        const currentExercises = [...get().addedExercises, newEx];
-        const { heatmap, total } = calculateStress(currentExercises);
+export const useWorkoutStore = create<WorkoutState>()(
+    persist(
+        (set, get) => ({
+            addedExercises: [],
+            heatmap: {} as Record<MuscleGroup, number>,
+            totalSystemStress: 0,
+            unitSystem: 'imperial',
+            durationSettings: {
+                secondsPerRep: 6,
+                secondsPerSet: 120,
+            },
 
-        set({
-            addedExercises: currentExercises,
-            heatmap,
-            totalSystemStress: total,
-        });
-    },
+            addExercise: (exercise) => {
+                const newEx = { ...exercise, id: crypto.randomUUID() };
+                const currentExercises = [...get().addedExercises, newEx];
+                const { heatmap, total } = calculateStress(currentExercises);
 
-    removeExercise: (id) => {
-        const currentExercises = get().addedExercises.filter(e => e.id !== id);
-        const { heatmap, total } = calculateStress(currentExercises);
-        set({
-            addedExercises: currentExercises,
-            heatmap,
-            totalSystemStress: total,
-        });
-    },
+                set({
+                    addedExercises: currentExercises,
+                    heatmap,
+                    totalSystemStress: total,
+                });
+            },
 
-    resetWorkout: () => set({ addedExercises: [], heatmap: {} as Record<MuscleGroup, number>, totalSystemStress: 0 }),
+            removeExercise: (id) => {
+                const currentExercises = get().addedExercises.filter(e => e.id !== id);
+                const { heatmap, total } = calculateStress(currentExercises);
+                set({
+                    addedExercises: currentExercises,
+                    heatmap,
+                    totalSystemStress: total,
+                });
+            },
 
-    toggleUnitSystem: () => set((state) => ({ unitSystem: state.unitSystem === 'imperial' ? 'metric' : 'imperial' })),
-    updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => set({ durationSettings: settings }),
-}));
+            resetWorkout: () => set({ addedExercises: [], heatmap: {} as Record<MuscleGroup, number>, totalSystemStress: 0 }),
+
+            toggleUnitSystem: () => set((state) => ({ unitSystem: state.unitSystem === 'imperial' ? 'metric' : 'imperial' })),
+            updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => set({ durationSettings: settings }),
+        }),
+        {
+            name: 'workout-storage',
+        }
+    )
+);

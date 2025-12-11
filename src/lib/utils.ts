@@ -69,3 +69,20 @@ export function calculateRecovery(stress: number): number {
     if (stress <= 80) return 72; // Orange (High)
     return 96; // Purple (Too High)
 }
+
+export function generateWorkoutCSV(exercises: { exerciseName: string; sets: number; reps: number; weight: number }[]): string {
+    const headers = ['Exercise', 'Sets', 'Reps', 'Weight'];
+    const rows = exercises.map(ex => [
+        ex.exerciseName,
+        ex.sets,
+        ex.reps,
+        ex.weight
+    ]);
+
+    const csvContent = [
+        headers.join(','),
+        ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    return csvContent;
+}

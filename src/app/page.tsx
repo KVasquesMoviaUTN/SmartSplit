@@ -1,15 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import { BodyHeatmap } from "@/components/BodyHeatmap";
 import { AddExerciseForm } from "@/components/AddExerciseForm";
 import { useWorkoutStore } from "@/store/workoutStore";
-import { Activity } from "lucide-react";
+import { Activity, Download } from "lucide-react";
 import { UnitToggle } from "@/components/UnitToggle";
 import { ModeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguageStore } from "@/store/languageStore";
+import { generateWorkoutCSV } from "@/lib/utils";
 
 import { AboutModal } from "@/components/AboutModal";
+import { Button } from "@/components/ui/components";
 
 export default function Home() {
   const { heatmap, totalSystemStress } = useWorkoutStore();
@@ -25,7 +28,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-xl">
               {/* <Dumbbell className="h-8 w-8" /> */}
-              <img src="/web-app-manifest-192x192.png" alt="Smart Split Logo" className="h-10 w-10 object-contain" />
+              <Image src="/web-app-manifest-192x192.png" alt="Smart Split Logo" width={40} height={40} className="object-contain" />
             </div>
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -51,6 +54,23 @@ export default function Home() {
           <div className="flex items-center gap-4 flex-wrap justify-end">
             <LanguageSwitcher />
             <ModeToggle />
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => {
+                const csv = generateWorkoutCSV(useWorkoutStore.getState().addedExercises);
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `workout-${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+              }}
+              title="Export to CSV"
+            >
+              <Download className="h-[1.2rem] w-[1.2rem]" />
+            </Button>
             <UnitToggle />
             <div className={`flex flex-col min-w-[140px] relative overflow-hidden p-3 rounded-2xl border backdrop-blur-md transition-all duration-500
               ${totalSystemStress < 200 ? 'bg-emerald-500/10 border-emerald-500/20' :
