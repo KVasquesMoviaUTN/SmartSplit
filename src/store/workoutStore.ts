@@ -30,18 +30,14 @@ const calculateStress = (exercises: WorkoutSet[]) => {
         const def = EXERCISE_DATABASE[ex.exerciseName];
         if (!def) return;
 
-        // Logic: Stress = Sets * Reps * BaseImpact * (Weight factor? Ignored for simplicity now, or just treated as volume)
-        // Simplified Logic: Stress = Sets * (BaseImpact)
-        // User Requirement: "If user adds Deadlift, add +8 stress to Hamstrings..."
-        // We multiply by Sets to make it accumulate. 1 Set of Deadlift = +8. 3 Sets = +24.
-
-        // NOTE: For better visualization, we might want to dampen it or use a log scale, 
-        // but linear accumulation per set is physically reasonable for "volume load".
+        // Logic: Stress = Sets * Activation Score (0-10)
+        // Example: 10 sets of an exercise with activation 10 = 100 stress (Max)
 
         const volumeMultiplier = ex.sets;
 
         def.impact.forEach((imp) => {
             const current = newHeatmap[imp.muscle] || 0;
+            // Add 1 unit per focus score per set
             const added = imp.activation * volumeMultiplier;
             newHeatmap[imp.muscle] = current + added;
             totalScale += added;

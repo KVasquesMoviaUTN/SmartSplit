@@ -39,7 +39,7 @@ export function calculateDuration(exercises: { sets: number; reps: number }[]): 
 
 export function calculateRecovery(stress: number): number {
     if (!stress || stress <= 0) return 0; // Grey
-    if (stress < 20) return 24; // Green
-    if (stress < 50) return 48; // Yellow
-    return 72; // Red
+    if (stress < 40) return 24; // Green (approx 1-4 sets)
+    if (stress < 80) return 48; // Yellow (approx 4-8 sets)
+    return 72; // Red (8+ sets)
 }

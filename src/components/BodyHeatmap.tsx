@@ -18,9 +18,9 @@ interface BodyHeatmapProps {
 // Color Utility
 const getMuscleColor = (stress: number) => {
     if (!stress || stress <= 0) return "fill-muted/20 stroke-border"; // Default: grey/transparent
-    if (stress < 20) return "fill-emerald-500 stroke-emerald-600"; // Low stress (approx 1-2 sets)
-    if (stress < 50) return "fill-yellow-500 stroke-yellow-600"; // Medium (approx 3-5 sets)
-    return "fill-rose-600 stroke-rose-700"; // High/Overtrained (5+ sets)
+    if (stress < 40) return "fill-emerald-500 stroke-emerald-600"; // Low stress (1-4 sets)
+    if (stress < 80) return "fill-yellow-500 stroke-yellow-600"; // Medium (4-8 sets)
+    return "fill-rose-600 stroke-rose-700"; // High/Overtrained (8+ sets)
 };
 
 import { ExerciseSuggestionModal } from "./ExerciseSuggestionModal";
