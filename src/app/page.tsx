@@ -1,65 +1,94 @@
-import Image from "next/image";
+"use client";
+
+import { BodyHeatmap } from "@/components/BodyHeatmap";
+import { AddExerciseForm } from "@/components/AddExerciseForm";
+import { useWorkoutStore } from "@/store/workoutStore";
+import { Activity } from "lucide-react";
+import { UnitToggle } from "@/components/UnitToggle";
+import { ModeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguageStore } from "@/store/languageStore";
+
+import { AboutModal } from "@/components/AboutModal";
 
 export default function Home() {
+  const { heatmap, totalSystemStress } = useWorkoutStore();
+  const { t } = useLanguageStore();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-4 md:p-8">
+      <AboutModal />
+      <div className="mx-auto max-w-6xl space-y-8">
+
+        {/* Header */}
+        <div className="flex flex-col items-center justify-between gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-xl">
+              {/* <Dumbbell className="h-8 w-8" /> */}
+              <img src="/web-app-manifest-192x192.png" alt="Smart Split Logo" className="h-10 w-10 object-contain" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-foreground">
+                {t('appTitle') === 'Smart Split' ? (
+                  <span className="flex items-center">
+                    <span>Smart Spl</span>
+                    <span className="relative px-[0.02em]">
+                      <span>ı</span>
+                      <span className="absolute left-1/2 -translate-x-1/2 top-[0.14em] w-[0.22em] h-[0.22em] bg-[#38C172] rounded-full"></span>
+                    </span>
+                    <span>t</span>
+                  </span>
+                ) : (
+                  <span>
+                    {t('appTitle')}
+                  </span>
+                )}
+              </h1>
+              <p className="text-muted-foreground text-sm">{t('subtitle')}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 flex-wrap justify-end">
+            <LanguageSwitcher />
+            <ModeToggle />
+            <UnitToggle />
+            <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
+              <div className="text-right">
+                <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{t('systemStress')}</div>
+                <div className="text-2xl font-mono font-bold text-foreground">{totalSystemStress.toFixed(1)}</div>
+              </div>
+              <Activity className={`h-8 w-8 ${totalSystemStress > 50 ? 'text-rose-500 animate-pulse' : 'text-emerald-500'}`} />
+            </div>
+          </div>
+
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+
+            {/* Left Col: Inputs & List */}
+            <div className="space-y-6">
+              <AddExerciseForm />
+
+              {/* Info Panel */}
+              <div className="p-6 rounded-xl bg-card border text-card-foreground text-sm space-y-2">
+                <h3 className="font-semibold">{t('howItWorks')}</h3>
+                <p className="text-muted-foreground">
+                  {t('howItWorksText')}
+                </p>
+              </div>
+            </div>
+
+            {/* Right Col: Heatmap */}
+            <div className="flex flex-col items-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shadow-inner min-h-[600px] justify-center">
+              <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+                {t('muscleActivation')}
+              </h2>
+              <BodyHeatmap heatmap={heatmap} />
+            </div>
+
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

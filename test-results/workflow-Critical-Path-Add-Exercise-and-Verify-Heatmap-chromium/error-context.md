@@ -1,0 +1,117 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - button "About Project" [ref=e3]:
+      - img
+      - generic [ref=e4]: About Project
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - generic [ref=e15]:
+          - heading "Smart Split" [level=1] [ref=e16]
+          - paragraph [ref=e17]: Advanced Hypertrophy Tracker
+      - generic [ref=e18]:
+        - combobox [ref=e19]:
+          - option "English" [selected]
+          - option "中文 (Chinese)"
+          - option "हिन्दी (Hindi)"
+          - option "Español (Spanish)"
+          - option "Français (French)"
+          - option "العربية (Arabic)"
+          - option "বাংলা (Bengali)"
+          - option "Русский (Russian)"
+          - option "Português (Portuguese)"
+          - option "Bahasa Indonesia"
+        - button "Toggle theme" [ref=e20]:
+          - img
+          - generic [ref=e21]: Toggle theme
+        - button "Kg / Lbs" [ref=e22]:
+          - generic [ref=e23]: Kg
+          - generic [ref=e24]: /
+          - generic [ref=e25]: Lbs
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: System Stress
+            - generic [ref=e29]: "0.0"
+          - img [ref=e30]
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - heading "Add Exercise" [level=3] [ref=e37]
+              - generic [ref=e39]:
+                - generic [ref=e40]:
+                  - generic [ref=e41]: Exercise
+                  - combobox "Exercise" [ref=e42]:
+                    - option "Bench Press" [selected]
+                    - option "Squat"
+                    - option "Deadlift"
+                    - option "Pull Up"
+                    - option "Overhead Press"
+                    - option "Barbell Row"
+                    - option "Dumbbell Curl"
+                    - option "Tricep Extension"
+                    - option "Leg Curl"
+                    - option "Leg Extension"
+                    - option "Crunch"
+                    - option "Side Plank"
+                  - paragraph [ref=e43]: Lie on bench, lower bar to chest, press up.
+                - generic [ref=e44]:
+                  - generic [ref=e45]:
+                    - generic [ref=e46]: Sets
+                    - spinbutton [ref=e47]: "3"
+                  - generic [ref=e48]:
+                    - generic [ref=e49]: Reps
+                    - spinbutton [ref=e50]: "10"
+                  - generic [ref=e51]:
+                    - generic [ref=e52]: Lbs
+                    - spinbutton [ref=e53]: "135"
+                - button "Add to Workout" [ref=e55]:
+                  - img
+                  - text: Add to Workout
+            - generic [ref=e56]:
+              - heading "Current Session" [level=3] [ref=e57]
+              - generic [ref=e59]: No exercises added yet.
+          - generic [ref=e60]:
+            - heading "How it works" [level=3] [ref=e61]
+            - paragraph [ref=e62]: Select an exercise and add it to your session. The body map will visualize the cumulative stress on each muscle group. Green indicates stimulus, Yellow indicates fatigue, Red indicates overtraining risk.
+        - generic [ref=e63]:
+          - heading "Muscle Activation" [level=2] [ref=e64]: Muscle Activation
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - generic [ref=e68] [cursor=pointer]:
+                - img [ref=e69]
+                - generic [ref=e71]: ≈ 0 kcal
+              - generic "Estimated Duration (6s/rep + 2m/rest)" [ref=e72]:
+                - img [ref=e73]
+                - generic [ref=e76]: ≈ 0 min
+            - generic [ref=e77]:
+              - button "Front" [ref=e78]
+              - button "Back" [ref=e79]
+            - img "Muscle Heatmap front view" [ref=e81]:
+              - 'generic "Traps: 0 (Recovery: 0h)" [ref=e84] [cursor=pointer]'
+              - 'generic "Traps: 0 (Recovery: 0h)" [ref=e85] [cursor=pointer]'
+              - 'generic "Pecs: 0 (Recovery: 0h)" [ref=e86] [cursor=pointer]'
+              - 'generic "Pecs: 0 (Recovery: 0h)" [ref=e87] [cursor=pointer]'
+              - 'generic "Delts: 0 (Recovery: 0h)" [ref=e88] [cursor=pointer]'
+              - 'generic "Delts: 0 (Recovery: 0h)" [ref=e89] [cursor=pointer]'
+              - 'generic "Abs: 0 (Recovery: 0h)" [ref=e90] [cursor=pointer]'
+              - 'generic "Obliques: 0 (Recovery: 0h)" [ref=e91] [cursor=pointer]'
+              - 'generic "Obliques: 0 (Recovery: 0h)" [ref=e92] [cursor=pointer]'
+              - 'generic "Biceps: 0 (Recovery: 0h)" [ref=e93] [cursor=pointer]'
+              - 'generic "Biceps: 0 (Recovery: 0h)" [ref=e94] [cursor=pointer]'
+              - 'generic "Forearms: 0 (Recovery: 0h)" [ref=e95] [cursor=pointer]'
+              - 'generic "Forearms: 0 (Recovery: 0h)" [ref=e96] [cursor=pointer]'
+              - 'generic "Quads: 0 (Recovery: 0h)" [ref=e97] [cursor=pointer]'
+              - 'generic "Quads: 0 (Recovery: 0h)" [ref=e98] [cursor=pointer]'
+              - 'generic "Calves: 0 (Recovery: 0h)" [ref=e101] [cursor=pointer]'
+              - 'generic "Calves: 0 (Recovery: 0h)" [ref=e102] [cursor=pointer]'
+            - generic [ref=e103]:
+              - generic [ref=e104]: Low
+              - generic [ref=e106]: Med
+              - generic [ref=e108]: High
+  - button "Open Next.js Dev Tools" [ref=e115] [cursor=pointer]:
+    - img [ref=e116]
+```
