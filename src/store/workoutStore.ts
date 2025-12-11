@@ -14,11 +14,16 @@ interface WorkoutState {
     heatmap: Record<MuscleGroup, number>; // Current stress (0-infinity, visualized usually capped at 20-30 for RED)
     totalSystemStress: number;
     unitSystem: 'imperial' | 'metric';
+    durationSettings: {
+        secondsPerRep: number;
+        secondsPerSet: number;
+    };
 
     addExercise: (exercise: Omit<WorkoutSet, 'id'>) => void;
     removeExercise: (id: string) => void;
     resetWorkout: () => void;
     toggleUnitSystem: () => void;
+    updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => void;
 }
 
 // Helper to recalculate stress
@@ -52,6 +57,10 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
     heatmap: {} as Record<MuscleGroup, number>,
     totalSystemStress: 0,
     unitSystem: 'imperial',
+    durationSettings: {
+        secondsPerRep: 6,
+        secondsPerSet: 120,
+    },
 
     addExercise: (exercise) => {
         const newEx = { ...exercise, id: crypto.randomUUID() };
@@ -78,4 +87,5 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
     resetWorkout: () => set({ addedExercises: [], heatmap: {} as Record<MuscleGroup, number>, totalSystemStress: 0 }),
 
     toggleUnitSystem: () => set((state) => ({ unitSystem: state.unitSystem === 'imperial' ? 'metric' : 'imperial' })),
+    updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => set({ durationSettings: settings }),
 }));

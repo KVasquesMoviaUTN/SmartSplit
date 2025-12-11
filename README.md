@@ -41,7 +41,7 @@ I wanted to bridge the gap between simple loggers and complex biomechanics softw
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/smart-split.git
+git clone https://github.com/KVasquesMoviaUTN/SmartSplit.git
 
 # Install dependencies (Node 20+)
 npm install
@@ -55,7 +55,7 @@ npm test && npx playwright test
 
 ## 👨‍💻 Author
 
-Built by **[Your Name]**.
+Built by **[Kalil Vasques Movia]**.
 *Software Engineer specializing in React, TypeScript, and Performance Optimization.*
 
-[Portfolio] • [LinkedIn] • [GitHub]
+[Portfolio] • [[LinkedIn](https://www.linkedin.com/in/kalil-vasques-movia/)] • [[GitHub](https://github.com/KVasquesMoviaUTN)]

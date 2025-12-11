@@ -25,4 +25,14 @@ describe('calculateDuration', () => {
         ];
         expect(calculateDuration(exercises)).toBe(18);
     });
+
+    it('should calculate duration with custom settings', () => {
+        // 3 sets, 10 reps
+        // Custom: 2s per rep, 60s per set
+        // Reps time: 3*10*2s = 60s = 1m
+        // Rest time: 3*60s = 180s = 3m
+        // Total: 4m
+        const exercises = [{ sets: 3, reps: 10 }];
+        expect(calculateDuration(exercises, 2, 60)).toBe(4);
+    });
 });

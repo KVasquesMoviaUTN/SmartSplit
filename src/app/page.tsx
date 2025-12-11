@@ -52,12 +52,44 @@ export default function Home() {
             <LanguageSwitcher />
             <ModeToggle />
             <UnitToggle />
-            <div className="flex items-center gap-4 bg-black/20 p-4 rounded-xl border border-white/5">
-              <div className="text-right">
-                <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{t('systemStress')}</div>
-                <div className="text-2xl font-mono font-bold text-foreground">{totalSystemStress.toFixed(1)}</div>
+            <div className={`flex flex-col min-w-[140px] relative overflow-hidden p-3 rounded-2xl border backdrop-blur-md transition-all duration-500
+              ${totalSystemStress < 200 ? 'bg-emerald-500/10 border-emerald-500/20' :
+                totalSystemStress < 400 ? 'bg-yellow-500/10 border-yellow-500/20' :
+                  totalSystemStress < 600 ? 'bg-orange-500/10 border-orange-500/20' :
+                    'bg-violet-600/10 border-violet-500/20 shadow-[0_0_15px_rgba(124,58,237,0.3)]'
+              }`}>
+              <div className="flex justify-between items-start mb-1">
+                <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">{t('systemStress')}</span>
+                <Activity className={`w-3 h-3 ${totalSystemStress > 600 ? 'animate-bounce text-violet-400' : 'text-muted-foreground'}`} />
               </div>
-              <Activity className={`h-8 w-8 ${totalSystemStress > 50 ? 'text-rose-500 animate-pulse' : 'text-emerald-500'}`} />
+              <div className="flex items-baseline gap-1">
+                <span className={`text-2xl font-black tracking-tight
+                  ${totalSystemStress < 200 ? 'text-emerald-500' :
+                    totalSystemStress < 400 ? 'text-yellow-400' :
+                      totalSystemStress < 600 ? 'text-orange-500' :
+                        'text-violet-400'
+                  }`}>
+                  {Math.round(totalSystemStress)}
+                </span>
+                <span className="text-[10px] font-medium text-muted-foreground">
+                  {totalSystemStress < 200 ? 'LIGHT' :
+                    totalSystemStress < 400 ? 'OPTIMAL' :
+                      totalSystemStress < 600 ? 'HIGH' :
+                        'EXTREME'}
+                </span>
+              </div>
+              {/* Progress Bar Background */}
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-black/10">
+                {/* Active Progress */}
+                <div
+                  className={`h-full transition-all duration-500 ${totalSystemStress < 200 ? 'bg-emerald-500' :
+                    totalSystemStress < 400 ? 'bg-yellow-400' :
+                      totalSystemStress < 600 ? 'bg-orange-500' :
+                        'bg-violet-500'
+                    }`}
+                  style={{ width: `${Math.min((totalSystemStress / 800) * 100, 100)}%` }}
+                />
+              </div>
             </div>
           </div>
 

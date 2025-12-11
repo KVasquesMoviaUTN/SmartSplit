@@ -23,6 +23,7 @@ export interface MuscleImpact {
 
 export interface ExerciseDef {
     impact: MuscleImpact[];
+    metValue?: number; // Metabolic Equivalent of Task (approx intensity)
 }
 
 export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
@@ -32,7 +33,10 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Triceps', activation: 7 },
             { muscle: 'FrontDelts', activation: 8 },
         ],
+        metValue: 6.0,
     },
+
+
     squat: {
         impact: [
             { muscle: 'Quads', activation: 10 },
@@ -40,7 +44,10 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'LowerBack', activation: 6 },
             { muscle: 'Hamstrings', activation: 5 },
         ],
+        metValue: 8.0,
     },
+
+
     deadlift: {
         impact: [
             { muscle: 'LowerBack', activation: 9 },
@@ -51,7 +58,9 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Lats', activation: 5 },
             { muscle: 'RearDelts', activation: 4 },
         ],
+        metValue: 8.0,
     },
+
     pull_up: {
         impact: [
             { muscle: 'Lats', activation: 10 },
@@ -60,6 +69,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Forearms', activation: 5 },
             { muscle: 'RearDelts', activation: 6 },
         ],
+        metValue: 6.0,
     },
     overhead_press: {
         impact: [
@@ -68,6 +78,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Triceps', activation: 6 },
             { muscle: 'Traps', activation: 4 },
         ],
+        metValue: 6.0,
     },
     barbell_row: {
         impact: [
@@ -78,50 +89,59 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'LowerBack', activation: 5 },
             { muscle: 'Forearms', activation: 5 },
         ],
+        metValue: 6.0,
     },
     lateral_raise: {
         impact: [
             { muscle: 'SideDelts', activation: 10 },
             { muscle: 'Traps', activation: 4 },
         ],
+        metValue: 3.5,
     },
     reverse_fly: {
         impact: [
             { muscle: 'RearDelts', activation: 10 },
             { muscle: 'Traps', activation: 5 },
         ],
+        metValue: 3.5,
     },
     dumbbell_curl: {
         impact: [
             { muscle: 'Biceps', activation: 10 },
             { muscle: 'Forearms', activation: 4 },
         ],
+        metValue: 3.5,
     },
     tricep_extension: {
         impact: [
             { muscle: 'Triceps', activation: 10 },
         ],
+        metValue: 3.5,
     },
     leg_curl: {
         impact: [
             { muscle: 'Hamstrings', activation: 10 },
         ],
+        metValue: 4.0,
     },
     leg_extension: {
         impact: [
             { muscle: 'Quads', activation: 10 },
         ],
+        metValue: 4.0,
     },
     crunch: {
         impact: [
             { muscle: 'Abs', activation: 10 },
         ],
+        metValue: 3.5,
     },
     side_plank: {
         impact: [
             { muscle: 'Obliques', activation: 9 },
             { muscle: 'Abs', activation: 5 },
         ],
+        metValue: 4.0,
     },
     push_up: {
         impact: [
@@ -130,6 +150,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Triceps', activation: 5 },
             { muscle: 'Abs', activation: 4 },
         ],
+        metValue: 5.0,
     },
     incline_bench_press: {
         impact: [
@@ -137,6 +158,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'FrontDelts', activation: 8 },
             { muscle: 'Triceps', activation: 7 },
         ],
+        metValue: 6.0,
     },
     dip: {
         impact: [
@@ -144,6 +166,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Pecs', activation: 7 },
             { muscle: 'FrontDelts', activation: 6 },
         ],
+        metValue: 6.0,
     },
     lat_pulldown: {
         impact: [
@@ -152,6 +175,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'RearDelts', activation: 5 },
             { muscle: 'Forearms', activation: 5 },
         ],
+        metValue: 5.0,
     },
     face_pull: {
         impact: [
@@ -159,6 +183,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Traps', activation: 8 },
             { muscle: 'SideDelts', activation: 5 },
         ],
+        metValue: 4.0,
     },
     lunge: {
         impact: [
@@ -167,22 +192,26 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Hamstrings', activation: 6 },
             { muscle: 'Calves', activation: 4 },
         ],
+        metValue: 7.0,
     },
     calf_raise: {
         impact: [
             { muscle: 'Calves', activation: 10 },
         ],
+        metValue: 3.5,
     },
     hammer_curl: {
         impact: [
             { muscle: 'Biceps', activation: 8 },
             { muscle: 'Forearms', activation: 7 },
         ],
+        metValue: 3.5,
     },
     skull_crusher: {
         impact: [
             { muscle: 'Triceps', activation: 10 },
         ],
+        metValue: 3.5,
     },
     plank: {
         impact: [
@@ -190,6 +219,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Obliques', activation: 6 },
             { muscle: 'FrontDelts', activation: 4 },
         ],
+        metValue: 4.0,
     },
 };
 

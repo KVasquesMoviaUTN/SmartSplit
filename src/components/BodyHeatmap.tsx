@@ -18,26 +18,31 @@ interface BodyHeatmapProps {
 // Color Utility
 const getMuscleColor = (stress: number) => {
     if (!stress || stress <= 0) return "fill-muted/20 stroke-border"; // Default: grey/transparent
-    if (stress < 40) return "fill-emerald-500 stroke-emerald-600"; // Low stress (1-4 sets)
-    if (stress < 80) return "fill-yellow-500 stroke-yellow-600"; // Medium (4-8 sets)
-    return "fill-rose-600 stroke-rose-700"; // High/Overtrained (8+ sets)
+    if (stress <= 20) return "fill-muted/40 stroke-slate-400"; // Grey (Active but low) - Distinct from empty
+    if (stress <= 40) return "fill-emerald-500 stroke-emerald-600"; // Low
+    if (stress <= 60) return "fill-yellow-500 stroke-yellow-600"; // Med
+    if (stress <= 80) return "fill-orange-500 stroke-orange-600"; // High
+    return "fill-violet-600 stroke-violet-500 animate-pulse"; // Too High
 };
 
 import { ExerciseSuggestionModal } from "./ExerciseSuggestionModal";
+
+import { DurationSettingsDialog } from "./DurationSettingsDialog";
 
 export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
     const [view, setView] = useState<'front' | 'back'>('front');
     const { t } = useLanguageStore();
     const [selectedMuscle, setSelectedMuscle] = useState<MuscleGroup | null>(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isDurationSettingsOpen, setIsDurationSettingsOpen] = useState(false);
 
     // User Stats & Calories
     const userStats = useUserStore();
-    const { addedExercises } = useWorkoutStore();
+    const { addedExercises, durationSettings } = useWorkoutStore();
 
     const totalSets = useMemo(() => addedExercises.reduce((acc, ex) => acc + ex.sets, 0), [addedExercises]);
-    const calories = useMemo(() => calculateCalories(userStats, totalSets), [userStats, totalSets]);
-    const duration = useMemo(() => calculateDuration(addedExercises), [addedExercises]);
+    const calories = useMemo(() => calculateCalories(userStats, addedExercises), [userStats, addedExercises]);
+    const duration = useMemo(() => calculateDuration(addedExercises, durationSettings.secondsPerRep, durationSettings.secondsPerSet), [addedExercises, durationSettings]);
 
     const paths = view === 'front' ? FRONT_PATHS : BACK_PATHS;
 
@@ -49,6 +54,12 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                 muscle={selectedMuscle}
             />
             <UserProfileDialog isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+            {isDurationSettingsOpen && (
+                <DurationSettingsDialog
+                    isOpen={isDurationSettingsOpen}
+                    onClose={() => setIsDurationSettingsOpen(false)}
+                />
+            )}
 
             {/* Stats Display: Calories & Duration */}
             <div className="flex gap-3">
@@ -63,8 +74,9 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                 </div>
 
                 <div
-                    className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full"
-                    title="Estimated Duration (6s/rep + 2m/rest)"
+                    className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full cursor-pointer hover:bg-blue-500/20 transition-all"
+                    title={`Estimated Duration (${durationSettings.secondsPerRep}s/rep + ${durationSettings.secondsPerSet}s/rest)`}
+                    onClick={() => setIsDurationSettingsOpen(true)}
                 >
                     <Clock className="w-4 h-4 text-blue-500" />
                     <span className="text-sm font-medium text-blue-400">
@@ -148,10 +160,11 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/5 to-transparent rounded-full opacity-20 mix-blend-overlay" />
             </div>
 
-            <div className="flex gap-4 text-xs text-muted-foreground">
+            <div className="flex gap-4 text-xs text-muted-foreground flex-wrap justify-center">
                 <div className="flex items-center gap-1"><div className="w-3 h-3 bg-emerald-500 rounded-full" /> {t('low')}</div>
                 <div className="flex items-center gap-1"><div className="w-3 h-3 bg-yellow-500 rounded-full" /> {t('med')}</div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-rose-600 rounded-full" /> {t('high')}</div>
+                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-orange-500 rounded-full" /> {t('high')}</div>
+                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-violet-600 rounded-full" /> {t('tooHigh')}</div>
             </div>
         </div >
     );
