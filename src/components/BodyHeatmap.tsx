@@ -17,7 +17,7 @@ interface BodyHeatmapProps {
 
 // Color Utility
 const getMuscleColor = (stress: number) => {
-    if (!stress || stress <= 0) return "fill-white/5 stroke-white/20"; // Default: visible silhouette with better contrast
+    if (!stress || stress <= 0) return "fill-black/10 stroke-black/20 dark:fill-white/5 dark:stroke-white/20"; // Default: visible silhouette with better contrast
     if (stress <= 20) return "fill-muted/40 stroke-slate-400"; // Grey (Active but low) - Distinct from empty
     if (stress <= 40) return "fill-emerald-500 stroke-emerald-600"; // Low
     if (stress <= 60) return "fill-yellow-500 stroke-yellow-600"; // Med
@@ -145,7 +145,7 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                                 }}
                                 className={cn(
                                     "transition-all duration-500 ease-in-out stroke-[0.5]",
-                                    isCosmetic ? "fill-muted/20 stroke-border cursor-default" : `${colorClass} hover:opacity-80 cursor-pointer hover:stroke-[1.5] hover:stroke-white`,
+                                    isCosmetic ? "fill-black/5 stroke-black/10 dark:fill-muted/20 dark:stroke-border cursor-default" : `${colorClass} hover:opacity-80 cursor-pointer hover:stroke-[1.5] hover:stroke-black/50 dark:hover:stroke-white`,
                                     selectedMuscle === p.muscle && "stroke-[2] stroke-white filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                                 )}
                             >
