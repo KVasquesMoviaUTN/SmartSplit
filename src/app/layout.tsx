@@ -81,6 +81,7 @@ export const metadata: Metadata = {
 };
 
 import { SWAndPWA } from "@/components/SWAndPWA";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -105,6 +106,7 @@ export default function RootLayout({
             <RestTimer />
           </div>
           <SWAndPWA />
+          <Analytics />
         </ThemeProvider>
         <script
           type="application/ld+json"
