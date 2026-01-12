@@ -6,6 +6,8 @@ import { useWorkoutStore } from "@/store/workoutStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { AboutModal } from "@/components/AboutModal";
 
+import Image from "next/image";
+
 export default function Home() {
   const { heatmap } = useWorkoutStore();
   const { t } = useLanguageStore();
@@ -14,6 +16,36 @@ export default function Home() {
     <main className="flex-1 bg-background p-4 md:p-8">
       <AboutModal />
       <div className="mx-auto max-w-7xl space-y-8">
+        {/* Hero Banner */}
+        <div className="w-full relative h-[200px] md:h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+          {/* Mobile Banner */}
+          <Image
+            src="/banner_mobile.png"
+            alt="Smart Split Hero Banner"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105 md:hidden"
+            priority
+          />
+          {/* Desktop Banner */}
+          <Image
+            src="/banner_desktop.png"
+            alt="Smart Split Hero Banner"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105 hidden md:block"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex items-end p-6 md:p-10">
+            <div className="relative z-10 max-w-2xl">
+              <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-2 text-foreground drop-shadow-lg">
+                {t('appTitle')}
+              </h1>
+              <p className="text-lg md:text-xl font-medium text-muted-foreground/90 backdrop-blur-sm rounded-lg inline-block">
+                {t('subtitle')}
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-[1fr_450px] gap-8 items-start">
           {/* Left Col: Inputs & List */}
           <div className="space-y-8">
