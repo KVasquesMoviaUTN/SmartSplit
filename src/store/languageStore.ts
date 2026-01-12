@@ -170,6 +170,12 @@ const TRANSLATIONS = {
         instruction_leg_extension: '双腿对抗阻力伸展以针对股四头肌。',
         instruction_crunch: '仰卧，上半身向膝盖卷曲。',
         instruction_side_plank: '用一只前臂和脚侧支撑身体，保持。',
+
+        // Workout Summary
+        workoutComplete: '训练完成！',
+        greatJob: '干得好，达成目标。',
+        finishSession: '结束会话',
+        finishWorkout: '结束训练',
     },
     es: {
         appTitle: 'Smart Split',
@@ -252,14 +258,20 @@ const TRANSLATIONS = {
         suggestions: 'सुझाव',
         bestExercisesFor: 'के लिए सर्वश्रेष्ठ व्यायाम',
         noExercisesFound: 'कोई व्यायाम नहीं मिला।',
+
+        // Workout Summary
+        workoutComplete: 'वर्कआउट पूरा हुआ!',
+        greatJob: 'बहुत बढ़िया, लक्ष्य हासिल किया।',
+        finishSession: 'सत्र समाप्त करें',
+        finishWorkout: 'वर्कआउट समाप्त करें',
     },
     // Minimal placeholders for others to save context window space, focusing on logic
-    fr: { appTitle: 'Smart Split', subtitle: 'Suivi d\'Hypertrophie', systemStress: 'Stress Système', addExercise: 'Ajouter', addToWorkout: 'Ajouter', currentSession: 'Session', noExercises: 'Aucun exercice', howItWorks: 'Comment ça marche', howItWorksText: 'Visualisez le stress musculaire.', muscleActivation: 'Activation', front: 'Avant', back: 'Arrière', low: 'Bas', med: 'Moy', high: 'Haute', tooHigh: 'Trop Haut', exercise: 'Examen', sets: 'Séries', reps: 'Reps' },
-    ar: { appTitle: 'Smart Split', subtitle: 'متتبع التضخم المتقدم', systemStress: 'إجهاد النظام', addExercise: 'إضافة تمرين', addToWorkout: 'إضافة للتمرين', currentSession: 'الجلسة الحالية', noExercises: 'لا تمارين', howItWorks: 'كيف يعمل', howItWorksText: 'تصور الإجهاد العضلي.', muscleActivation: 'تنشيط العضلات', front: 'أمام', back: 'خلف', low: 'منخفض', med: 'متوسط', high: 'عالي', tooHigh: 'مرتفع جدا', exercise: 'تمرين', sets: 'مجموعات', reps: 'تكرار' },
-    bn: { appTitle: 'Smart Split', subtitle: 'Advanced Hypertrophy Tracker', systemStress: 'System Stress', addExercise: 'Add Exercise', addToWorkout: 'Add', currentSession: 'Session', noExercises: 'No exercises', howItWorks: 'Algorithm', howItWorksText: 'Stress visualization.', muscleActivation: 'Activation', front: 'Front', back: 'Back', low: 'Low', med: 'Med', high: 'High', tooHigh: 'Too High', exercise: 'Exercise', sets: 'Sets', reps: 'Reps' },
-    ru: { appTitle: 'Smart Split', subtitle: 'Трекер Гипертрофии', systemStress: 'Стресс Системы', addExercise: 'Добавить', addToWorkout: 'Добавить', currentSession: 'Сессия', noExercises: 'Нет упражнений', howItWorks: 'Как это работает', howItWorksText: 'Визуализация стресса.', muscleActivation: 'Активация', front: 'Перед', back: 'Спина', low: 'Низ', med: 'Сред', high: 'Выс', tooHigh: 'Слишком высоко', exercise: 'Упражнение', sets: 'Подходы', reps: 'Повторы' },
+    fr: { appTitle: 'Smart Split', subtitle: 'Suivi d\'Hypertrophie', systemStress: 'Stress Système', addExercise: 'Ajouter', addToWorkout: 'Ajouter', currentSession: 'Session', noExercises: 'Aucun exercice', howItWorks: 'Comment ça marche', howItWorksText: 'Visualisez le stress musculaire.', muscleActivation: 'Activation', front: 'Avant', back: 'Arrière', low: 'Bas', med: 'Moy', high: 'Haute', tooHigh: 'Trop Haut', exercise: 'Examen', sets: 'Séries', reps: 'Reps', workoutComplete: 'Entraînement terminé !', greatJob: 'Beau travail, objectifs atteints.', finishSession: 'Terminer la séance', finishWorkout: 'Terminer l\'entraînement' },
+    ar: { appTitle: 'Smart Split', subtitle: 'متتبع التضخم المتقدم', systemStress: 'إجهاد النظام', addExercise: 'إضافة تمرين', addToWorkout: 'إضافة للتمرين', currentSession: 'الجلسة الحالية', noExercises: 'لا تمارين', howItWorks: 'كيف يعمل', howItWorksText: 'تصور الإجهاد العضلي.', muscleActivation: 'تنشيط العضلات', front: 'أمام', back: 'خلف', low: 'منخفض', med: 'متوسط', high: 'عالي', tooHigh: 'مرتفع جدا', exercise: 'تمرين', sets: 'مجموعات', reps: 'تكرار', workoutComplete: 'اكتمل التمرين!', greatJob: 'عمل رائع، حققت أهدافك.', finishSession: 'إنهاء الجلسة', finishWorkout: 'إنهاء التمرين' },
+    bn: { appTitle: 'Smart Split', subtitle: 'Advanced Hypertrophy Tracker', systemStress: 'System Stress', addExercise: 'Add Exercise', addToWorkout: 'Add', currentSession: 'Session', noExercises: 'No exercises', howItWorks: 'Algorithm', howItWorksText: 'Stress visualization.', muscleActivation: 'Activation', front: 'Front', back: 'Back', low: 'Low', med: 'Med', high: 'High', tooHigh: 'Too High', exercise: 'Exercise', sets: 'Sets', reps: 'Reps', workoutComplete: 'ওয়ার্কআউট সম্পন্ন!', greatJob: 'চমৎকার কাজ, লক্ষ্য অর্জিত।', finishSession: 'সেশন শেষ করুন', finishWorkout: 'ওয়ার্কআউট শেষ করুন' },
+    ru: { appTitle: 'Smart Split', subtitle: 'Трекер Гипертрофии', systemStress: 'Стресс Системы', addExercise: 'Добавить', addToWorkout: 'Добавить', currentSession: 'Сессия', noExercises: 'Нет упражнений', howItWorks: 'Как это работает', howItWorksText: 'Визуализация стресса.', muscleActivation: 'Активация', front: 'Перед', back: 'Спина', low: 'Низ', med: 'Сред', high: 'Выс', tooHigh: 'Слишком высоко', exercise: 'Упражнение', sets: 'Подходы', reps: 'Повторы', workoutComplete: 'Тренировка завершена!', greatJob: 'Отличная работа, цели достигнуты.', finishSession: 'Завершить сессию', finishWorkout: 'Завершить тренировку' },
     pt: { appTitle: 'Smart Split', subtitle: 'Rastreador de Hipertrofia', systemStress: 'Estresse do Sistema', addExercise: 'Adicionar', addToWorkout: 'Adicionar', currentSession: 'Sessão', noExercises: 'Sem exercícios', howItWorks: 'Como funciona', howItWorksText: 'Visualize o estresse muscular.', muscleActivation: 'Ativação', front: 'Frente', back: 'Costas', low: 'Baixo', med: 'Méd', high: 'Alto', tooHigh: 'Muito Alto', exercise: 'Exercício', sets: 'Séries', reps: 'Reps', workoutComplete: 'Treino Concluído!', greatJob: 'Ótimo trabalho!', finishSession: 'Finalizar Sessão', finishWorkout: 'Finalizar Treino' },
-    id: { appTitle: 'Smart Split', subtitle: 'Pelacak Hipertrofi', systemStress: 'Stres Sistem', addExercise: 'Tambah', addToWorkout: 'Tambah', currentSession: 'Sesi', noExercises: 'Tidak ada latihan', howItWorks: 'Cara kerja', howItWorksText: 'Visualisasi stres otot.', muscleActivation: 'Aktivasi', front: 'Depan', back: 'Belakang', low: 'Rendah', med: 'Sedang', high: 'Tinggi', tooHigh: 'Terlalu Tinggi', exercise: 'Latihan', sets: 'Set', reps: 'Reps' },
+    id: { appTitle: 'Smart Split', subtitle: 'Pelacak Hipertrofi', systemStress: 'Stres Sistem', addExercise: 'Tambah', addToWorkout: 'Tambah', currentSession: 'Sesi', noExercises: 'Tidak ada latihan', howItWorks: 'Cara kerja', howItWorksText: 'Visualisasi stres otot.', muscleActivation: 'Aktivasi', front: 'Depan', back: 'Belakang', low: 'Rendah', med: 'Sedang', high: 'Tinggi', tooHigh: 'Terlalu Tinggi', exercise: 'Latihan', sets: 'Set', reps: 'Reps', workoutComplete: 'Latihan Selesai!', greatJob: 'Kerja bagus, target tercapai.', finishSession: 'Selesaikan Sesi', finishWorkout: 'Selesaikan Latihan' },
 };
 
 export const useLanguageStore = create<LanguageState>((set, get) => ({
