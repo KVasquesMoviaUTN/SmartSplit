@@ -4,7 +4,7 @@
 
 > **Live Demo:** [https://smart-split-tau.vercel.app/](https://smart-split-tau.vercel.app/) | **Status:** Production Ready
 
-**Smart Split** is a high-performance Progressive Web App (PWA) engineered to quantify systemic fatigue and visualize muscle recovery in real-time. Unlike generic trackers, it combines **physiological algorithms** (Mifflin-St Jeor) with **biomechanical data** to provide personalized insights.
+**Smart Split** is a high-performance Progressive Web App (PWA) engineered to quantify systemic fatigue an              d visualize muscle recovery in real-time. Unlike generic trackers, it combines **physiological algorithms** (Mifflin-St Jeor) with **biomechanical data** to provide personalized insights.
 
 ## 🎯 Why I Built This
 To bridge the gap between simple workout loggers and complex biomechanics software. The goal was to demonstrate how **modern web technologies** can deliver native-like performance, complex data visualization, and offline capabilities without sacrificing accessibility or SEO.

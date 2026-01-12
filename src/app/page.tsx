@@ -17,7 +17,7 @@ export default function Home() {
       <AboutModal />
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Hero Banner */}
-        <div className="w-full relative h-[200px] md:h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+        <div className="w-full relative h-[200px] md:h-auto md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
           {/* Mobile Banner */}
           <div className="absolute inset-0 md:hidden">
             <Image
