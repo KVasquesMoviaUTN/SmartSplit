@@ -95,9 +95,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
           <SWAndPWA />
         </ThemeProvider>
         <script

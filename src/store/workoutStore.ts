@@ -20,6 +20,7 @@ interface WorkoutState {
     };
 
     addExercise: (exercise: Omit<WorkoutSet, 'id'>) => void;
+    updateExercise: (id: string, updates: Partial<WorkoutSet>) => void;
     removeExercise: (id: string) => void;
     resetWorkout: () => void;
     toggleUnitSystem: () => void;
@@ -71,6 +72,18 @@ export const useWorkoutStore = create<WorkoutState>()(
                 const currentExercises = [...get().addedExercises, newEx];
                 const { heatmap, total } = calculateStress(currentExercises);
 
+                set({
+                    addedExercises: currentExercises,
+                    heatmap,
+                    totalSystemStress: total,
+                });
+            },
+
+            updateExercise: (id, updates) => {
+                const currentExercises = get().addedExercises.map(ex => 
+                    ex.id === id ? { ...ex, ...updates } : ex
+                );
+                const { heatmap, total } = calculateStress(currentExercises);
                 set({
                     addedExercises: currentExercises,
                     heatmap,
