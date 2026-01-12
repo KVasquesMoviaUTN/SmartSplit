@@ -43,3 +43,10 @@ next-env.d.ts
 # playwright
 playwright-report
 test-results
+
+# next.js compiler cache
+.swc/
+
+# logs
+errors.txt
+*_output.txt
