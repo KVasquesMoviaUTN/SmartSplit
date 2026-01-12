@@ -186,7 +186,7 @@ npm test && npx playwright test
 Built by **Kalil Vasques Movia**.
 *Software Engineer specializing in React, TypeScript, and Performance Optimization.*
 
-[Portfolio] • [[LinkedIn](https://www.linkedin.com/in/kalil-vasques-movia/)] • [[GitHub](https://github.com/KVasquesMoviaUTN)]
+[[Portfolio](https://new-portfolio-ten-kappa-59.vercel.app/)] • [[LinkedIn](https://www.linkedin.com/in/kalil-vasques-movia/)] • [[GitHub](https://github.com/KVasquesMoviaUTN)]
 
 ## 📄 License
 

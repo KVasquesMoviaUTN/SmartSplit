@@ -28,7 +28,7 @@ export function Footer() {
 						<span>LinkedIn</span>
 					</a>
 					<a
-						href="#"
+						href="https://new-portfolio-ten-kappa-59.vercel.app/"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 text-sm"
