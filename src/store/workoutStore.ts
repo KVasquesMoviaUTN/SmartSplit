@@ -25,6 +25,17 @@ interface WorkoutState {
     resetWorkout: () => void;
     toggleUnitSystem: () => void;
     updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => void;
+
+    // Timer State
+    timerStatus: 'idle' | 'running' | 'paused';
+    timerSeconds: number;
+    startTimer: (seconds: number) => void;
+    stopTimer: () => void;
+    decrementTimer: () => void;
+
+    // Interactive Heatmap
+    activeMuscleFilter: MuscleGroup | null;
+    setMuscleFilter: (muscle: MuscleGroup | null) => void;
 }
 
 // Helper to recalculate stress
@@ -105,6 +116,20 @@ export const useWorkoutStore = create<WorkoutState>()(
 
             toggleUnitSystem: () => set((state) => ({ unitSystem: state.unitSystem === 'imperial' ? 'metric' : 'imperial' })),
             updateDurationSettings: (settings: { secondsPerRep: number; secondsPerSet: number }) => set({ durationSettings: settings }),
+
+            // Timer Implementation
+            timerStatus: 'idle',
+            timerSeconds: 0,
+            startTimer: (seconds) => set({ timerStatus: 'running', timerSeconds: seconds }),
+            stopTimer: () => set({ timerStatus: 'idle', timerSeconds: 0 }),
+            decrementTimer: () => set((state) => {
+                if (state.timerSeconds <= 1) return { timerStatus: 'idle', timerSeconds: 0 };
+                return { timerSeconds: state.timerSeconds - 1 };
+            }),
+
+            // Interactive Heatmap
+            activeMuscleFilter: null,
+            setMuscleFilter: (muscle) => set({ activeMuscleFilter: muscle }),
         }),
         {
             name: 'workout-storage',

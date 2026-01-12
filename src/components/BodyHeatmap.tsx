@@ -25,7 +25,7 @@ const getMuscleColor = (stress: number) => {
     return "fill-violet-600 stroke-violet-500 animate-pulse"; // Too High
 };
 
-import { ExerciseSuggestionModal } from "./ExerciseSuggestionModal";
+
 
 import { DurationSettingsDialog } from "./DurationSettingsDialog";
 
@@ -47,11 +47,6 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
 
     return (
         <div className="flex flex-col items-center space-y-4">
-            <ExerciseSuggestionModal
-                isOpen={!!selectedMuscle}
-                onClose={() => setSelectedMuscle(null)}
-                muscle={selectedMuscle}
-            />
             <UserProfileDialog isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
             {isDurationSettingsOpen && (
                 <DurationSettingsDialog
@@ -127,7 +122,7 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                         const stress = heatmap[p.muscle as MuscleGroup] || 0;
                         const colorClass = getMuscleColor(stress);
                         const isCosmetic = ['Head', 'Neck', 'Knees'].includes(p.muscle);
-                        const recoveryHours = calculateRecovery(stress);
+                        const recoveryHours = calculateRecovery(stress, p.muscle as MuscleGroup);
 
                         // Add glow filter for active muscles
                         const filterStyle = stress > 50 ? { filter: 'url(#glow-high)' } : (stress > 0 ? { filter: 'url(#glow-low)' } : {});
@@ -140,7 +135,14 @@ export function BodyHeatmap({ heatmap }: BodyHeatmapProps) {
                                 onClick={() => {
                                     console.log('Clicked muscle:', p.muscle);
                                     if (!isCosmetic) {
-                                        setSelectedMuscle(p.muscle as MuscleGroup);
+                                        // Toggle filter: if already selected, clear it
+                                        if (selectedMuscle === p.muscle) {
+                                            setSelectedMuscle(null);
+                                            useWorkoutStore.getState().setMuscleFilter(null);
+                                        } else {
+                                            setSelectedMuscle(p.muscle as MuscleGroup);
+                                            useWorkoutStore.getState().setMuscleFilter(p.muscle as MuscleGroup);
+                                        }
                                     }
                                 }}
                                 className={cn(

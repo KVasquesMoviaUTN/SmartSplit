@@ -112,6 +112,12 @@ const TRANSLATIONS = {
         instruction_hammer_curl: 'Curl dumbbells with neutral grip (palms facing each other).',
         instruction_skull_crusher: 'Lie back, lower weight to forehead bending only elbows.',
         instruction_plank: 'Hold push-up position on forearms, keep body straight.',
+        
+        // Workout Summary
+        workoutComplete: 'Workout Complete!',
+        greatJob: 'Great job crushing your goals.',
+        finishSession: 'Finish Session',
+        finishWorkout: 'Finish Workout',
     },
     zh: {
         appTitle: '系统过载',
@@ -216,6 +222,12 @@ const TRANSLATIONS = {
         instruction_leg_extension: 'Extiende piernas contra resistencia para cuádriceps.',
         instruction_crunch: 'Acuéstate, flexiona torso hacia rodillas.',
         instruction_side_plank: 'Apoya cuerpo en antebrazo y borde del pie, mantén.',
+
+        // Workout Summary
+        workoutComplete: '¡Entrenamiento Completado!',
+        greatJob: 'Gran trabajo alcanzando tus metas.',
+        finishSession: 'Terminar Sesión',
+        finishWorkout: 'Terminar Entrenamiento',
     },
     hi: {
         appTitle: 'Smart Split',
@@ -246,7 +258,7 @@ const TRANSLATIONS = {
     ar: { appTitle: 'Smart Split', subtitle: 'متتبع التضخم المتقدم', systemStress: 'إجهاد النظام', addExercise: 'إضافة تمرين', addToWorkout: 'إضافة للتمرين', currentSession: 'الجلسة الحالية', noExercises: 'لا تمارين', howItWorks: 'كيف يعمل', howItWorksText: 'تصور الإجهاد العضلي.', muscleActivation: 'تنشيط العضلات', front: 'أمام', back: 'خلف', low: 'منخفض', med: 'متوسط', high: 'عالي', tooHigh: 'مرتفع جدا', exercise: 'تمرين', sets: 'مجموعات', reps: 'تكرار' },
     bn: { appTitle: 'Smart Split', subtitle: 'Advanced Hypertrophy Tracker', systemStress: 'System Stress', addExercise: 'Add Exercise', addToWorkout: 'Add', currentSession: 'Session', noExercises: 'No exercises', howItWorks: 'Algorithm', howItWorksText: 'Stress visualization.', muscleActivation: 'Activation', front: 'Front', back: 'Back', low: 'Low', med: 'Med', high: 'High', tooHigh: 'Too High', exercise: 'Exercise', sets: 'Sets', reps: 'Reps' },
     ru: { appTitle: 'Smart Split', subtitle: 'Трекер Гипертрофии', systemStress: 'Стресс Системы', addExercise: 'Добавить', addToWorkout: 'Добавить', currentSession: 'Сессия', noExercises: 'Нет упражнений', howItWorks: 'Как это работает', howItWorksText: 'Визуализация стресса.', muscleActivation: 'Активация', front: 'Перед', back: 'Спина', low: 'Низ', med: 'Сред', high: 'Выс', tooHigh: 'Слишком высоко', exercise: 'Упражнение', sets: 'Подходы', reps: 'Повторы' },
-    pt: { appTitle: 'Smart Split', subtitle: 'Rastreador de Hipertrofia', systemStress: 'Estresse do Sistema', addExercise: 'Adicionar', addToWorkout: 'Adicionar', currentSession: 'Sessão', noExercises: 'Sem exercícios', howItWorks: 'Como funciona', howItWorksText: 'Visualize o estresse muscular.', muscleActivation: 'Ativação', front: 'Frente', back: 'Costas', low: 'Baixo', med: 'Méd', high: 'Alto', tooHigh: 'Muito Alto', exercise: 'Exercício', sets: 'Séries', reps: 'Reps' },
+    pt: { appTitle: 'Smart Split', subtitle: 'Rastreador de Hipertrofia', systemStress: 'Estresse do Sistema', addExercise: 'Adicionar', addToWorkout: 'Adicionar', currentSession: 'Sessão', noExercises: 'Sem exercícios', howItWorks: 'Como funciona', howItWorksText: 'Visualize o estresse muscular.', muscleActivation: 'Ativação', front: 'Frente', back: 'Costas', low: 'Baixo', med: 'Méd', high: 'Alto', tooHigh: 'Muito Alto', exercise: 'Exercício', sets: 'Séries', reps: 'Reps', workoutComplete: 'Treino Concluído!', greatJob: 'Ótimo trabalho!', finishSession: 'Finalizar Sessão', finishWorkout: 'Finalizar Treino' },
     id: { appTitle: 'Smart Split', subtitle: 'Pelacak Hipertrofi', systemStress: 'Stres Sistem', addExercise: 'Tambah', addToWorkout: 'Tambah', currentSession: 'Sesi', noExercises: 'Tidak ada latihan', howItWorks: 'Cara kerja', howItWorksText: 'Visualisasi stres otot.', muscleActivation: 'Aktivasi', front: 'Depan', back: 'Belakang', low: 'Rendah', med: 'Sedang', high: 'Tinggi', tooHigh: 'Terlalu Tinggi', exercise: 'Latihan', sets: 'Set', reps: 'Reps' },
 };
 

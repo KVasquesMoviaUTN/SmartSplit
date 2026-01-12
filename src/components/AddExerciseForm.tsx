@@ -4,19 +4,41 @@ import { useWorkoutStore } from "@/store/workoutStore";
 import { getAllExercises, EXERCISE_DATABASE } from "@/lib/muscleMapping";
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "./ui/components";
 import { useState } from "react";
-import { Plus, Trash2, Minus } from "lucide-react";
+import { Plus, Trash2, Minus, CheckCircle } from "lucide-react";
 import { useLanguageStore } from "@/store/languageStore";
+import { WorkoutSummaryModal } from "./WorkoutSummaryModal";
 
 export function AddExerciseForm() {
-    const { addExercise, updateExercise, addedExercises, removeExercise, unitSystem } = useWorkoutStore();
+    const { addExercise, updateExercise, addedExercises, removeExercise, unitSystem, startTimer, durationSettings, activeMuscleFilter, setMuscleFilter } = useWorkoutStore();
     const { t } = useLanguageStore();
-    const options = getAllExercises();
+
+    // Filter options based on active muscle filter
+    const allOptions = getAllExercises();
+    const options = activeMuscleFilter
+        ? allOptions.filter(id => {
+            const def = EXERCISE_DATABASE[id];
+            return def.impact.some(i => i.muscle === activeMuscleFilter && i.activation >= 5);
+        })
+        : allOptions;
+
+    const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
     // Local state for form
     const [selectedExercise, setSelectedExercise] = useState(options[0]);
+    // Update selected exercise if options change and current selection is invalid
+    if (!options.includes(selectedExercise) && options.length > 0) {
+        setSelectedExercise(options[0]);
+    }
+
     const [sets, setSets] = useState(3);
     const [reps, setReps] = useState(10);
     const [weight, setWeight] = useState(135);
+
+    // Get substitutions
+    const currentDef = EXERCISE_DATABASE[selectedExercise];
+    const substitutions = currentDef?.category
+        ? allOptions.filter(id => id !== selectedExercise && EXERCISE_DATABASE[id].category === currentDef.category).slice(0, 3)
+        : [];
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,15 +48,28 @@ export function AddExerciseForm() {
             reps,
             weight
         });
+        startTimer(durationSettings.secondsPerSet);
     };
 
     return (
         <div className="space-y-8">
             <Card className="bg-card border border-border shadow-xl overflow-hidden relative group">
                 <CardHeader className="pb-4 border-b border-border">
-                    <CardTitle className="text-xl font-bold tracking-tight flex items-center gap-2">
-                        <span className="w-1 h-6 bg-primary rounded-full" />
-                        {t('addExercise')}
+                    <CardTitle className="text-xl font-bold tracking-tight flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <span className="w-1 h-6 bg-primary rounded-full" />
+                            {t('addExercise')}
+                        </div>
+                        {activeMuscleFilter && (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setMuscleFilter(null)}
+                                className="text-xs h-7 border-primary/20 text-primary hover:bg-primary/10"
+                            >
+                                Filter: {activeMuscleFilter} <Trash2 className="ml-2 w-3 h-3" />
+                            </Button>
+                        )}
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-6">
@@ -61,6 +96,25 @@ export function AddExerciseForm() {
                                     </svg>
                                 </div>
                             </div>
+
+                            {/* Substitutions */}
+                            {substitutions.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    <span className="text-xs text-muted-foreground flex items-center">Try instead:</span>
+                                    {substitutions.map(sub => (
+                                        <button
+                                            key={sub}
+                                            type="button"
+                                            onClick={() => setSelectedExercise(sub)}
+                                            className="text-[10px] px-2 py-1 rounded-md bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-primary/10"
+                                        >
+                                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                            {t(`exercise_${sub}` as any)}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
                             <p className="text-xs text-muted-foreground/80 px-1 italic flex items-center gap-1">
                                 <span className="w-1 h-1 rounded-full bg-primary/50" />
                                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -179,6 +233,20 @@ export function AddExerciseForm() {
                     ))}
                 </div>
             </div>
-        </div>
+
+            {
+                addedExercises.length > 0 && (
+                    <Button
+                        onClick={() => setIsSummaryOpen(true)}
+                        className="w-full h-14 text-lg font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    >
+                        <CheckCircle className="mr-2 h-6 w-6" />
+                        {t('finishWorkout') || "Finish Workout"}
+                    </Button>
+                )
+            }
+
+            <WorkoutSummaryModal isOpen={isSummaryOpen} onClose={() => setIsSummaryOpen(false)} />
+        </div >
     );
 }

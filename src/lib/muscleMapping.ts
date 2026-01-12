@@ -25,6 +25,7 @@ export interface ExerciseDef {
     impact: MuscleImpact[];
     metValue?: number; // Metabolic Equivalent of Task (approx intensity)
     isBodyweight?: boolean;
+    category?: 'push_horizontal' | 'push_vertical' | 'pull_vertical' | 'pull_horizontal' | 'legs_squat' | 'legs_hinge' | 'legs_isolation' | 'isolation_arms' | 'core';
 }
 
 export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
@@ -156,6 +157,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
         ],
         metValue: 5.0,
         isBodyweight: true,
+        category: 'push_horizontal',
     },
     incline_bench_press: {
         impact: [
@@ -182,6 +184,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
             { muscle: 'Forearms', activation: 5 },
         ],
         metValue: 5.0,
+        category: 'pull_vertical',
     },
     face_pull: {
         impact: [
@@ -200,6 +203,7 @@ export const EXERCISE_DATABASE: Record<string, ExerciseDef> = {
         ],
         metValue: 7.0,
         isBodyweight: true,
+        category: 'legs_squat',
     },
     calf_raise: {
         impact: [
@@ -254,4 +258,30 @@ export const getExercisesForMuscle = (muscle: MuscleGroup): { id: string, def: E
         const impactB = b.def.impact.find(mi => mi.muscle === muscle)?.activation || 0;
         return impactB - impactA;
     });
+};
+
+export const MUSCLE_RECOVERY_CONFIG: Record<MuscleGroup, { baseHours: number; stressFactor: number }> = {
+    // Large Muscles (Legs/Back) - Slower Recovery
+    Quads: { baseHours: 48, stressFactor: 0.5 },
+    Hamstrings: { baseHours: 48, stressFactor: 0.5 },
+    Glutes: { baseHours: 48, stressFactor: 0.5 },
+    Lats: { baseHours: 36, stressFactor: 0.4 },
+    LowerBack: { baseHours: 48, stressFactor: 0.6 }, // Very slow recovery
+
+    // Major Upper Body - Moderate Recovery
+    Pecs: { baseHours: 36, stressFactor: 0.4 },
+    FrontDelts: { baseHours: 24, stressFactor: 0.3 },
+    Traps: { baseHours: 24, stressFactor: 0.3 },
+
+    // Smaller/Accessory - Faster Recovery
+    SideDelts: { baseHours: 24, stressFactor: 0.25 },
+    RearDelts: { baseHours: 24, stressFactor: 0.25 },
+    Triceps: { baseHours: 24, stressFactor: 0.25 },
+    Biceps: { baseHours: 24, stressFactor: 0.25 },
+    Forearms: { baseHours: 12, stressFactor: 0.2 },
+    
+    // Resilient Muscles - Very Fast Recovery
+    Abs: { baseHours: 12, stressFactor: 0.2 },
+    Obliques: { baseHours: 12, stressFactor: 0.2 },
+    Calves: { baseHours: 12, stressFactor: 0.2 },
 };

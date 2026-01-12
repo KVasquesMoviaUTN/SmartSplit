@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-import { EXERCISE_DATABASE } from "./muscleMapping";
+import { EXERCISE_DATABASE, MUSCLE_RECOVERY_CONFIG, MuscleGroup } from "./muscleMapping";
 
 // Helper to calculate BMR via Mifflin-St Jeor Equation
 export function calculateBMR(stats: UserStats): number {
@@ -62,12 +62,26 @@ export function calculateDuration(
     return Math.round(totalSeconds / 60); // Return in minutes
 }
 
-export function calculateRecovery(stress: number): number {
-    if (stress <= 20) return 12; // Grey (Very Low/Warmup)
-    if (stress <= 40) return 24; // Green (Low)
-    if (stress <= 60) return 48; // Yellow (Med)
-    if (stress <= 80) return 72; // Orange (High)
-    return 96; // Purple (Too High)
+
+
+export function calculateRecovery(stress: number, muscle?: MuscleGroup): number {
+    if (!stress || stress <= 0) return 0;
+
+    // Default fallback if no muscle provided (shouldn't happen in new logic)
+    if (!muscle) {
+        if (stress <= 20) return 12;
+        if (stress <= 40) return 24;
+        if (stress <= 60) return 48;
+        if (stress <= 80) return 72;
+        return 96;
+    }
+
+    const config = MUSCLE_RECOVERY_CONFIG[muscle];
+    // Formula: Base Recovery + (Stress * Factor)
+    // Example: Quads (Base 48) + (Stress 50 * 0.5) = 48 + 25 = 73 hours
+    const recoveryHours = config.baseHours + (stress * config.stressFactor);
+    
+    return Math.round(recoveryHours);
 }
 
 export function generateWorkoutCSV(exercises: { exerciseName: string; sets: number; reps: number; weight: number }[]): string {

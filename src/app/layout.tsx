@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { RestTimer } from "@/components/RestTimer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -59,10 +60,7 @@ export const metadata: Metadata = {
     description: "Track your fitness journey with precision.",
     creator: "@smartsplit",
   },
-  icons: {
-    icon: '/web-app-manifest-192x192.png',
-    apple: '/web-app-manifest-192x192.png',
-  },
+
   manifest: '/manifest.json',
   robots: {
     index: true,
@@ -99,6 +97,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <RestTimer />
           </div>
           <SWAndPWA />
         </ThemeProvider>
