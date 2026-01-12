@@ -30,7 +30,7 @@ export function AddExerciseForm() {
 
     return (
         <div className="space-y-6">
-            <Card className="glass-panel border-white/10 bg-white/5 backdrop-blur-md">
+            <Card className="glass-panel border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:-translate-y-1">
                 <CardHeader>
                     <CardTitle>{t('addExercise')}</CardTitle>
                 </CardHeader>
@@ -40,7 +40,7 @@ export function AddExerciseForm() {
                             <Label htmlFor="exercise-select">{t('exercise')}</Label>
                             <select
                                 id="exercise-select"
-                                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground [&>option]:bg-background [&>option]:text-foreground"
+                                className="flex h-9 w-full rounded-md border border-white/10 bg-black/20 px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary text-foreground [&>option]:bg-zinc-900 [&>option]:text-foreground hover:bg-black/30"
                                 value={selectedExercise}
                                 onChange={(e) => setSelectedExercise(e.target.value)}
                             >

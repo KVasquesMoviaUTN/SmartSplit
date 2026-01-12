@@ -1,143 +1,43 @@
 "use client";
 
-import Image from "next/image";
 import { BodyHeatmap } from "@/components/BodyHeatmap";
 import { AddExerciseForm } from "@/components/AddExerciseForm";
 import { useWorkoutStore } from "@/store/workoutStore";
-import { Activity, Download } from "lucide-react";
-import { UnitToggle } from "@/components/UnitToggle";
-import { ModeToggle } from "@/components/ThemeToggle";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguageStore } from "@/store/languageStore";
-import { generateWorkoutCSV } from "@/lib/utils";
-
 import { AboutModal } from "@/components/AboutModal";
-import { Button } from "@/components/ui/components";
 
 export default function Home() {
-  const { heatmap, totalSystemStress } = useWorkoutStore();
+  const { heatmap } = useWorkoutStore();
   const { t } = useLanguageStore();
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 p-4 md:p-8">
       <AboutModal />
       <div className="mx-auto max-w-6xl space-y-8">
+        <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+          {/* Left Col: Inputs & List */}
+          <div className="space-y-6">
+            <AddExerciseForm />
 
-        {/* Header */}
-        <div className="flex flex-col items-center justify-between gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-xl">
-              {/* <Dumbbell className="h-8 w-8" /> */}
-              <Image src="/web-app-manifest-192x192.png" alt="Smart Split Logo" width={40} height={40} className="object-contain" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-foreground">
-                {t('appTitle') === 'Smart Split' ? (
-                  <span className="flex items-center">
-                    <span>Smart Spl</span>
-                    <span className="relative px-[0.02em]">
-                      <span>ı</span>
-                      <span className="absolute left-1/2 -translate-x-1/2 top-[0.14em] w-[0.22em] h-[0.22em] bg-[#38C172] rounded-full"></span>
-                    </span>
-                    <span>t</span>
-                  </span>
-                ) : (
-                  <span>
-                    {t('appTitle')}
-                  </span>
-                )}
-              </h1>
-              <p className="text-muted-foreground text-sm">{t('subtitle')}</p>
+            {/* Info Panel */}
+            <div className="p-6 rounded-xl bg-card border text-card-foreground text-sm space-y-2">
+              <h3 className="font-semibold">{t('howItWorks')}</h3>
+              <p className="text-muted-foreground">
+                {t('howItWorksText')}
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 flex-wrap justify-end">
-            <LanguageSwitcher />
-            <ModeToggle />
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => {
-                const csv = generateWorkoutCSV(useWorkoutStore.getState().addedExercises);
-                const blob = new Blob([csv], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `workout-${new Date().toISOString().split('T')[0]}.csv`;
-                a.click();
-                window.URL.revokeObjectURL(url);
-              }}
-              title="Export to CSV"
-            >
-              <Download className="h-[1.2rem] w-[1.2rem]" />
-            </Button>
-            <UnitToggle />
-            <div className={`flex flex-col min-w-[140px] relative overflow-hidden p-3 rounded-2xl border backdrop-blur-md transition-all duration-500
-              ${totalSystemStress < 200 ? 'bg-emerald-500/10 border-emerald-500/20' :
-                totalSystemStress < 400 ? 'bg-yellow-500/10 border-yellow-500/20' :
-                  totalSystemStress < 600 ? 'bg-orange-500/10 border-orange-500/20' :
-                    'bg-violet-600/10 border-violet-500/20 shadow-[0_0_15px_rgba(124,58,237,0.3)]'
-              }`}>
-              <div className="flex justify-between items-start mb-1">
-                <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">{t('systemStress')}</span>
-                <Activity className={`w-3 h-3 ${totalSystemStress > 600 ? 'animate-bounce text-violet-400' : 'text-muted-foreground'}`} />
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className={`text-2xl font-black tracking-tight
-                  ${totalSystemStress < 200 ? 'text-emerald-500' :
-                    totalSystemStress < 400 ? 'text-yellow-400' :
-                      totalSystemStress < 600 ? 'text-orange-500' :
-                        'text-violet-400'
-                  }`}>
-                  {Math.round(totalSystemStress)}
-                </span>
-                <span className="text-[10px] font-medium text-muted-foreground">
-                  {totalSystemStress < 200 ? 'LIGHT' :
-                    totalSystemStress < 400 ? 'OPTIMAL' :
-                      totalSystemStress < 600 ? 'HIGH' :
-                        'EXTREME'}
-                </span>
-              </div>
-              {/* Progress Bar Background */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-black/10">
-                {/* Active Progress */}
-                <div
-                  className={`h-full transition-all duration-500 ${totalSystemStress < 200 ? 'bg-emerald-500' :
-                    totalSystemStress < 400 ? 'bg-yellow-400' :
-                      totalSystemStress < 600 ? 'bg-orange-500' :
-                        'bg-violet-500'
-                    }`}
-                  style={{ width: `${Math.min((totalSystemStress / 800) * 100, 100)}%` }}
-                />
-              </div>
-            </div>
-          </div>
+          {/* Right Col: Heatmap */}
+          <div className="relative flex flex-col items-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shadow-inner min-h-[600px] justify-center overflow-hidden group">
+            {/* Spotlight Effect */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-          {/* Content Grid */}
-          <div className="grid lg:grid-cols-[1fr_400px] gap-8">
-
-            {/* Left Col: Inputs & List */}
-            <div className="space-y-6">
-              <AddExerciseForm />
-
-              {/* Info Panel */}
-              <div className="p-6 rounded-xl bg-card border text-card-foreground text-sm space-y-2">
-                <h3 className="font-semibold">{t('howItWorks')}</h3>
-                <p className="text-muted-foreground">
-                  {t('howItWorksText')}
-                </p>
-              </div>
-            </div>
-
-            {/* Right Col: Heatmap */}
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shadow-inner min-h-[600px] justify-center">
-              <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
-                {t('muscleActivation')}
-              </h2>
-              <BodyHeatmap heatmap={heatmap} />
-            </div>
-
+            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2 relative z-10">
+              <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+              {t('muscleActivation')}
+            </h2>
+            <BodyHeatmap heatmap={heatmap} />
           </div>
         </div>
       </div>
