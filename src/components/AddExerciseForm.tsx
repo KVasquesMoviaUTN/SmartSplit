@@ -87,8 +87,16 @@ export function AddExerciseForm() {
                 <h3 className="text-sm font-medium text-muted-foreground">{t('currentSession')}</h3>
                 <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2">
                     {addedExercises.length === 0 && (
-                        <div className="text-center py-8 text-muted-foreground text-sm border border-dashed rounded-lg">
-                            {t('noExercises')}
+                        <div className="flex flex-col items-center justify-center py-12 text-center space-y-3 border-2 border-dashed border-white/10 rounded-xl bg-white/5">
+                            <div className="p-3 bg-primary/10 rounded-full">
+                                <Plus className="w-6 h-6 text-primary animate-pulse" />
+                            </div>
+                            <div className="space-y-1">
+                                <p className="font-medium text-foreground">{t('getStarted') || "Get started!"}</p>
+                                <p className="text-sm text-muted-foreground max-w-[200px] mx-auto">
+                                    {t('addFirstExercise') || "Add your first exercise to see your muscle heatmap light up. 💪"}
+                                </p>
+                            </div>
                         </div>
                     )}
                     {addedExercises.map((ex) => (

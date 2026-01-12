@@ -17,7 +17,7 @@ interface BodyHeatmapProps {
 
 // Color Utility
 const getMuscleColor = (stress: number) => {
-    if (!stress || stress <= 0) return "fill-muted-foreground/20 stroke-muted-foreground/30"; // Default: visible silhouette
+    if (!stress || stress <= 0) return "fill-white/5 stroke-white/20"; // Default: visible silhouette with better contrast
     if (stress <= 20) return "fill-muted/40 stroke-slate-400"; // Grey (Active but low) - Distinct from empty
     if (stress <= 40) return "fill-emerald-500 stroke-emerald-600"; // Low
     if (stress <= 60) return "fill-yellow-500 stroke-yellow-600"; // Med

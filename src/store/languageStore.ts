@@ -58,6 +58,8 @@ const TRANSLATIONS = {
         suggestions: 'Suggestions',
         bestExercisesFor: 'Best exercises for',
         noExercisesFound: 'No specific exercises found for this muscle group.',
+        getStarted: 'Get started!',
+        addFirstExercise: 'Add your first exercise to see your muscle heatmap light up. 💪',
 
         // Exercise Names
         exercise_bench_press: 'Bench Press',
