@@ -19,21 +19,25 @@ export default function Home() {
         {/* Hero Banner */}
         <div className="w-full relative h-[200px] md:h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
           {/* Mobile Banner */}
-          <Image
-            src="/banner_mobile.png"
-            alt="Smart Split Hero Banner"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105 md:hidden"
-            priority
-          />
+          <div className="absolute inset-0 md:hidden">
+            <Image
+              src="/banner_mobile.png"
+              alt="Smart Split Hero Banner"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              priority
+            />
+          </div>
           {/* Desktop Banner */}
-          <Image
-            src="/banner_desktop.png"
-            alt="Smart Split Hero Banner"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105 hidden md:block"
-            priority
-          />
+          <div className="absolute inset-0 hidden md:block">
+            <Image
+              src="/banner_desktop.png"
+              alt="Smart Split Hero Banner"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              priority
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent flex items-end p-6 md:p-10">
             <div className="relative z-10 max-w-2xl">
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter mb-2 text-foreground drop-shadow-lg">

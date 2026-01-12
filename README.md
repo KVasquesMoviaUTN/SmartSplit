@@ -1,6 +1,6 @@
 # Smart Split: Advanced Hypertrophy Tracker
 
-![Smart Split Banner](https://via.placeholder.com/1200x400.png?text=Smart+Split+Preview)
+![Smart Split Banner](public/banner_desktop.png)
 
 > **Live Demo:** [https://smart-split-tau.vercel.app/](https://smart-split-tau.vercel.app/) | **Status:** Production Ready
 
